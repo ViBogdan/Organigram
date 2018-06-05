@@ -2,11 +2,19 @@ from __init__ import db
 from models import Employee
 
 
-def print_direct_employees(instance, level=0):
-    print("{}{}".format(" " * level * 4, instance.name))
+#core logic
+def print_direct_employees(instance, the_list, level=0):
+    the_list.append("{}{} is {} with ID {}".format(" " * level * 4, instance.position, instance.name, instance.id))
     for direct_employee in db.session.query(Employee).filter(Employee.reporting_manager == instance.name):
-        print_direct_employees(direct_employee, level+1)
+        print_direct_employees(direct_employee, the_list, level+1)
+    return the_list
 
 
-for instance in db.session.query(Employee).filter(Employee.reporting_manager == "BOARD"):
-    print_direct_employees(instance)
+# un-comment to activate testing of core logic:
+
+# final_list = []
+# for instance in db.session.query(Employee).filter(Employee.reporting_manager == "BOARD"):
+#     print_direct_employees(instance, final_list)
+#
+# for element in final_list:
+#     print(element)

@@ -1,16 +1,23 @@
 from flask import render_template, request, redirect, url_for
 from __init__ import db, app
 import models
+from print_structure import print_direct_employees
 
 
 @app.route("/")
 @app.route("/index")
 def index_page():
-    current_employees = []
-    for current_employee in db.session.query(models.Employee):
-        current_employees.append(current_employee)
 
-    return render_template("index.html", current_employees=current_employees)
+    #finds the CEO of the company as being the person to report to the BOARD:
+    for instance in db.session.query(models.Employee).filter(models.Employee.reporting_manager == "BOARD"):
+        ceo = instance
+
+    organization = [] #our list to be populated
+
+    #populating the organization list with all positions including indentations
+    print_direct_employees(ceo, organization)
+
+    return render_template("index.html", organization=organization)
 
 
 @app.route("/add", methods = ["GET", "POST"])

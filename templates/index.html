@@ -33,31 +33,8 @@
                 <article>
                     <p>Here you will see the updated Orgnigram after each update sumbitted!</p>
                     <p>
-                        {% for employee in current_employees %}
-                            {% if employee.position == "CEO" %}
-                                <pre>{{ employee.position }} is {{ employee.name }}</pre>
-                            {% endif %}
-
-                            {% if employee.position == "VP" %}
-                                <pre>  {{ employee.position }} is {{ employee.name }}</pre>
-
-                                {% set up = employee.name %}
-                                {% for employee in current_employees %}
-                                    {% if employee.reporting_manager == up %}
-                                        <pre>       {{ employee.position }} is {{ employee.name}}</pre>
-
-                                        {% set up = employee.name %}
-                                        {% for employee in current_employees %}
-                                            {% if employee.reporting_manager == up %}
-                                            <pre>           {{ employee.position }} is {{ employee.name }}</pre>
-                                            {% endif %}
-                                        {% endfor %}
-
-                                    {% endif %}
-                                {% endfor %}
-
-                            {% endif %}
-
+                        {% for employee in organization %}
+                            <pre> {{ employee }} </pre>
                         {% endfor %}
                     </p>
                 </article>
