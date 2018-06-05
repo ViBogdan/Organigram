@@ -17,7 +17,7 @@ def index_page():
     #populating the organization list with all positions including indentations
     print_direct_employees(ceo, organization)
 
-    return render_template("index.html", organization=organization)
+    return render_template("index.html", organization=organization, ceo=ceo)
 
 
 @app.route("/add", methods = ["GET", "POST"])

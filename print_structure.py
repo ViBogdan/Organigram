@@ -4,7 +4,7 @@ from models import Employee
 
 #core logic
 def print_direct_employees(instance, the_list, level=0):
-    the_list.append("{}{} is {} with ID {}".format(" " * level * 4, instance.position, instance.name, instance.id))
+    the_list.append("{}{} as {}({})".format(" " * level * 4, instance.name, instance.position, instance.id))
     for direct_employee in db.session.query(Employee).filter(Employee.reporting_manager == instance.name):
         print_direct_employees(direct_employee, the_list, level+1)
     return the_list
