@@ -1,62 +1,168 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
 
-        <link rel="stylesheet" href="static/css/normalize.min.css">
-        <link rel="stylesheet" href="static/css/main.css">
+  <head>
 
-        <script src="static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    </head>
-    <body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <a href="index"><h1 class="title">Home</h1></a>
-                <nav>
-                    <ul>
-                        <li><a href="add">Add</a></li>
-                        <li><a href="update">Update</a></li>
-                        <li><a href="delete">Delete</a></li>
-                    </ul>
-                </nav>
-            </header>
+    <title>Scrolling Nav - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#add">Add</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#update">Update</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#delete">Delete</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
 
-        <div class="main-container">
-            <div class="main wrapper clearfix">
+    <header class="bg-primary text-white">
+      <!--<div class="container text-center">-->
+        <h1>Welcome to Organigram</h1>
+        <p class="lead">Below you can see the live rendering of the Organigram</p>
+        <p>
+          {% for employee in organization %}
+            <pre> {{ employee }} </pre>
+          {% endfor %}
+        </p>
+      </div>
+    </header>
 
-                <article>
-                    <p>Here you will see the updated Orgnigram after each update sumbitted!</p>
-                    <p>
-                        {% for employee in organization %}
-                            <pre> {{ employee }} </pre>
-                        {% endfor %}
-                    </p>
-                </article>
+    <section id="add">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Add Employee</h2>
+            <p class="lead">Here you will be able to add new employees to Organigram</p>
 
-                <aside>
-                    <h3>The current CEO of the company is:
-                                    {{ ceo.name }}
-                    </h3>
-                </aside>
+            <form action="" method="post">
+              <p class="lead">Please input the name, position and reporting manager of the new employee:</p>
+              <ul>
+                <p>
+                      Name of employee: <input type="text" name="new_name">
+                </p>
+                <p>
+                      Position of employee: <select name="new_position">
+                                                <option value="VP">VP</option>
+                                                <option value="Manager">Manager</option>
+                                                <option value="Consultant">Consultant</option>
+                                            </select>
+                </p>
+                <p>
+                      Reporting Manager of employee: <input type="text" name="new_reporting_manager">
+                </p>
+                <button type="submit">Submit</button>
+              </ul>
+            </form>
 
-            </div> <!-- #main -->
-        </div> <!-- #main-container -->
-
-        <div class="footer-container">
-            <footer class="wrapper">
-                <h3></h3>
-            </footer>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <section id="update" class="bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Update Employees</h2>
+            <p class="lead">Here you will be able to update any existing employee</p>
 
-        <script src="js/main.js"></script>
-    </body>
+            <form action="" method="post">
+              <p class="lead">Please update the employee based on his or her ID:</p>
+              <ul>
+                <p>
+                      ID of employee: <input type="number" name="ID">
+                </p>
+                <p>
+                      Name of employee: <input type="text" name="update_name">
+                </p>
+                <p>
+                      Position of employee: <select name="update_position">
+                                                <option value=""></option>
+                                                <option value="VP">VP</option>
+                                                <option value="Manager">Manager</option>
+                                                <option value="Consultant">Consultant</option>
+                                            </select>
+                </p>
+                <p>
+                      Reporting Manager of employee: <input type="text" name="update_reporting_manager">
+                </p>
+                    <button type="submit">Submit</button>
+              </ul>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="delete">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Delete employee</h2>
+            <p class="lead">From here you will be able to delete an employee based on their ID:</p>
+
+            <form action="" method="post">
+              <p class="lead">Please delete an employee based on his or her ID:</p>
+              <ul>
+                <p>
+                      ID of employee: <input type="number" name="ID">
+                </p>
+                <button type="submit">Submit</button>
+              </ul>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Bogdan Vintila 2012</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom JavaScript for this theme -->
+    <script src="static/js/scrolling-nav.js"></script>
+
+  </body>
+
 </html>

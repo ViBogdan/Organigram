@@ -5,8 +5,10 @@ from print_structure import print_direct_employees
 
 
 @app.route("/")
-@app.route("/index")
+@app.route("/index", methods = ["GET", "POST"])
 def index_page():
+
+    #Display organigram:
 
     #finds the CEO of the company as being the person to report to the BOARD:
     for instance in db.session.query(models.Employee).filter(models.Employee.reporting_manager == "BOARD"):
@@ -17,11 +19,8 @@ def index_page():
     #populating the organization list with all positions including indentations
     print_direct_employees(ceo, organization)
 
-    return render_template("index.html", organization=organization, ceo=ceo)
+    #Add to Organigram
 
-
-@app.route("/add", methods = ["GET", "POST"])
-def add_page():
     if request.method == "POST":
         new_name = request.form['new_name']
         new_position = request.form['new_position']
@@ -30,17 +29,8 @@ def add_page():
         new_employee = models.Employee(name=new_name, position=new_position, reporting_manager=new_reporting_manager)
         db.session.add(new_employee)
         db.session.commit()
-        return redirect(url_for('index_page'))
 
-    return render_template("add.html")
-
-
-@app.route("/update", methods = ["GET", "POST"])
-def update_page():
-
-    # current_employees = []
-    # for current_employee in db.session.query(models.Employee):
-    #     current_employees.append(current_employee) #test
+    #Update organigram:
 
     if request.method == "POST":
         ID = request.form["ID"]
@@ -58,13 +48,8 @@ def update_page():
             update_this.reporting_manager = update_reporting_manager
 
         db.session.commit()
-        return redirect(url_for('index_page'))
 
-    return render_template("update.html", current_employees=current_employees)
-
-
-@app.route("/delete", methods = ["GET", "POST"])
-def delete_page():
+    #Delet from organigram:
 
     current_employees = []
     for current_employee in db.session.query(models.Employee):
@@ -81,8 +66,8 @@ def delete_page():
 
         db.session.delete(delete_this)
         db.session.commit()
-        return redirect(url_for('index_page'))
-    return render_template("delete.html")
+
+    return render_template("index.html", organization=organization, ceo=ceo, current_employees=current_employees)
 
 
 if __name__ == "__main__":
