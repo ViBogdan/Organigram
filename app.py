@@ -4,8 +4,8 @@ import models
 from print_structure import print_direct_employees
 
 
-@app.route("/")
-@app.route("/index", methods = ["GET", "POST"])
+@app.route("/", methods = ['GET', 'POST'])
+@app.route("/index", methods = ['GET', 'POST'])
 def index_page():
 
     #Display organigram:
@@ -21,20 +21,25 @@ def index_page():
 
     #Add to Organigram
 
-    if request.method == "POST":
+    current_employees = []
+    for current_employee in db.session.query(models.Employee):
+        current_employees.append(current_employee)
+
+    if request.method == 'POST':
         new_name = request.form['new_name']
         new_position = request.form['new_position']
         new_reporting_manager = request.form['new_reporting_manager']
 
-        new_employee = models.Employee(name=new_name, position=new_position, reporting_manager=new_reporting_manager)
-        db.session.add(new_employee)
-        db.session.commit()
+        if new_name and new_position and new_reporting_manager:
+            new_employee = models.Employee(name=new_name, position=new_position, reporting_manager=new_reporting_manager)
+            db.session.add(new_employee)
+            db.session.commit()
 
     #Update organigram:
 
-    if request.method == "POST":
-        ID = request.form["ID"]
-        update_this = models.Employee.query.filter_by(id = ID).first()
+        ID_update = request.form["ID_update"]
+        if ID_update != 0:
+            update_this = models.Employee.query.filter_by(id = ID_update).first()
 
         update_name = request.form['update_name']
         update_position = request.form['update_position']
@@ -49,15 +54,11 @@ def index_page():
 
         db.session.commit()
 
-    #Delet from organigram:
+    #Delete from organigram:
 
-    current_employees = []
-    for current_employee in db.session.query(models.Employee):
-        current_employees.append(current_employee)
-
-    if request.method == "POST":
-        ID = request.form["ID"]
-        delete_this = models.Employee.query.filter_by(id = ID).first()
+        ID_delete = request.form["ID_delete"]
+        if ID_delete:
+            delete_this = models.Employee.query.filter_by(id = ID_delete).first()
 
         if delete_this.position == "Manager" or delete_this.position == "VP":
             for employee in current_employees:
