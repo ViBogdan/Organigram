@@ -40,7 +40,7 @@ def update_page():
 
     # current_employees = []
     # for current_employee in db.session.query(models.Employee):
-    #     current_employees.append(current_employee)  
+    #     current_employees.append(current_employee) #test
 
     if request.method == "POST":
         ID = request.form["ID"]
