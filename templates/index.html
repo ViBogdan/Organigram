@@ -62,7 +62,7 @@
             <h2>Add Employee</h2>
             <p class="lead">Here you will be able to add new employees to Organigram</p>
 
-            <form action="" method="post">
+            <form action="" method="post" id="add_employee">
               <p class="lead">Please input the name, position and reporting manager of the new employee:</p>
               <ul>
                 <p>
@@ -78,7 +78,7 @@
                 <p>
                       Reporting Manager of employee: <input type="text" name="new_reporting_manager">
                 </p>
-                <button type="submit">Submit</button>
+                <button type="submit" name="add" value="add">Submit</button>
               </ul>
             </form>
 
@@ -94,11 +94,11 @@
             <h2>Update Employees</h2>
             <p class="lead">Here you will be able to update any existing employee</p>
 
-            <form action="" method="post">
+            <form action="" method="post" id="update_employee">
               <p class="lead">Please update the employee based on his or her ID:</p>
               <ul>
                 <p>
-                      ID of employee: <input type="number" name="ID_update" value="0">
+                      ID of employee: <input type="number" name="ID_update">
                 </p>
                 <p>
                       Name of employee: <input type="text" name="update_name">
@@ -114,7 +114,7 @@
                 <p>
                       Reporting Manager of employee: <input type="text" name="update_reporting_manager">
                 </p>
-                    <button type="submit">Submit</button>
+                    <button type="submit" name="update" value="update">Submit</button>
               </ul>
             </form>
 
@@ -130,13 +130,13 @@
             <h2>Delete employee</h2>
             <p class="lead">From here you will be able to delete an employee based on their ID:</p>
 
-            <form action="" method="post">
+            <form action="" method="post" id="delete_employee">
               <p class="lead">Please delete an employee based on his or her ID:</p>
               <ul>
                 <p>
                       ID of employee: <input type="number" name="ID_delete">
                 </p>
-                <button type="submit">Submit</button>
+                <button type="submit" name="delete" value="delete">Submit</button>
               </ul>
             </form>
 

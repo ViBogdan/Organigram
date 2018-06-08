@@ -25,7 +25,7 @@ def index_page():
     for current_employee in db.session.query(models.Employee):
         current_employees.append(current_employee)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.form.get('add') == "add":
         new_name = request.form['new_name']
         new_position = request.form['new_position']
         new_reporting_manager = request.form['new_reporting_manager']
@@ -34,12 +34,12 @@ def index_page():
             new_employee = models.Employee(name=new_name, position=new_position, reporting_manager=new_reporting_manager)
             db.session.add(new_employee)
             db.session.commit()
+        return redirect(url_for('index_page'))
 
-    #Update organigram:
+    if request.method == 'POST' and request.form.get('update') == "update":
 
         ID_update = request.form["ID_update"]
-        if ID_update != 0:
-            update_this = models.Employee.query.filter_by(id = ID_update).first()
+        update_this = models.Employee.query.filter_by(id = ID_update).first()
 
         update_name = request.form['update_name']
         update_position = request.form['update_position']
@@ -53,8 +53,9 @@ def index_page():
             update_this.reporting_manager = update_reporting_manager
 
         db.session.commit()
+        return redirect(url_for('index_page'))
 
-    #Delete from organigram:
+    if request.method == 'POST' and request.form.get('delete') == "delete":
 
         ID_delete = request.form["ID_delete"]
         if ID_delete:
@@ -67,6 +68,7 @@ def index_page():
 
         db.session.delete(delete_this)
         db.session.commit()
+        return redirect(url_for('index_page'))
 
     return render_template("index.html", organization=organization, ceo=ceo, current_employees=current_employees)
 
