@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
+    <title>Organigram</title>
 
     <!-- Bootstrap core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Show Org. Structure</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,14 +45,13 @@
 
     <header class="bg-primary text-white">
       <!--<div class="container text-center">-->
+
         <h1>Welcome to Organigram</h1>
         <p class="lead">Below you can see the live rendering of the Organigram</p>
-        <p>
           {% for employee in organization %}
-            <pre> {{ employee }} </pre>
+            <pre class="employee"> {{ employee }} </pre>
           {% endfor %}
-        </p>
-      </div>
+
     </header>
 
     <section id="add">
@@ -70,13 +69,19 @@
                 </p>
                 <p>
                       Position of employee: <select name="new_position">
+                                                <option value=""></option>
                                                 <option value="VP">VP</option>
                                                 <option value="Manager">Manager</option>
                                                 <option value="Consultant">Consultant</option>
                                             </select>
                 </p>
                 <p>
-                      Reporting Manager of employee: <input type="text" name="new_reporting_manager">
+                      Reporting Manager of employee: <select name="new_reporting_manager">
+                                                      <option value=""></option>
+                                                      {% for selectable_employee in current_employees %}
+                                                        <option value="{{ selectable_employee.name }}">{{ selectable_employee.name }}</option>
+                                                      {% endfor %}
+                                                     </select>
                 </p>
                 <button type="submit" name="add" value="add">Submit</button>
               </ul>
@@ -112,7 +117,12 @@
                                             </select>
                 </p>
                 <p>
-                      Reporting Manager of employee: <input type="text" name="update_reporting_manager">
+                      Reporting Manager of employee: <select name="update_reporting_manager">
+                                                      <option value=""></option>
+                                                      {% for selectable_employee in current_employees %}
+                                                        <option value="{{ selectable_employee.name }}">{{ selectable_employee.name }}</option>
+                                                      {% endfor %}
+                                                     </select>
                 </p>
                     <button type="submit" name="update" value="update">Submit</button>
               </ul>
@@ -148,7 +158,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Bogdan Vintila 2012</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Bogdan Vintila 2018</p>
       </div>
       <!-- /.container -->
     </footer>

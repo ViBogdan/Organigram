@@ -25,7 +25,7 @@ def index_page():
     for current_employee in db.session.query(models.Employee):
         current_employees.append(current_employee)
 
-    if request.method == 'POST' and request.form.get('add') == "add":
+    if request.method == 'POST' and request.form.get('add') == "add":  #looks at the button name and value at the end of the form
         new_name = request.form['new_name']
         new_position = request.form['new_position']
         new_reporting_manager = request.form['new_reporting_manager']
@@ -35,6 +35,8 @@ def index_page():
             db.session.add(new_employee)
             db.session.commit()
         return redirect(url_for('index_page'))
+
+    #Update Organigram
 
     if request.method == 'POST' and request.form.get('update') == "update":
 
@@ -54,6 +56,8 @@ def index_page():
 
         db.session.commit()
         return redirect(url_for('index_page'))
+
+    #Delete from Organigram
 
     if request.method == 'POST' and request.form.get('delete') == "delete":
 
